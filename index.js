@@ -1,21 +1,11 @@
 'use strict'
 
 const path = require('path')
-
-const through = require('through2')
+const load = (file) => require(path.join(__dirname, file))
 
 module.exports = (options) => {
-  if(!options || typeof options !== 'object') options = {}
-
-  if(!('base' in options)) options.base = path.dirname(module.parent.filename)
-
   const dbust = require('dbust')(options)
+  const plugin = load('./plugin.js')
 
-  return through.obj((file, encoding, cb) => {
-    const files = {}
-
-    files[path.basename(file.revOrigPath)] = path.basename(file.path)
-
-    dbust(files, cb, file)
-  })
+  return plugin(dbust)
 }

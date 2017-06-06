@@ -1,23 +1,25 @@
 'use strict'
 
 const path = require('path')
-
 const through = require('through2')
-const util = require('gulp-util')
-const PluginError = util.PluginError
 
-module.exports = (dbust) =>
-  through.obj((file, encoding, cb) => {
+let _dbust
+
+const plugin = options => {
+
+  if (typeof options !== 'undefined') _dbust.options(options)
+
+  return through.obj((file, encoding, cb) => {
     const files = {}
 
     files[path.basename(file.revOrigPath)] = path.basename(file.path)
 
-    dbust(files)
-      .then(() => {
-        cb(null, file)
-      })
-      .catch((err) => {
-        if(typeof err === 'string') err = new Error(err)
-        cb(new PluginError('gulp-dbust', err.message))
-      })
+    _dbust.put(files)
+    cb(null, file)
   })
+}
+
+module.exports = dbust => {
+  _dbust = dbust
+  return plugin
+}

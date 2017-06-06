@@ -1,11 +1,6 @@
 'use strict'
 
-const path = require('path')
-const load = (file) => require(path.join(__dirname, file))
+const dbust = require('dbust')
+const plugin = require(__dirname + '/plugin.js')
 
-module.exports = (options) => {
-  const dbust = require('dbust')(options)
-  const plugin = load('./plugin.js')
-
-  return plugin(dbust)
-}
+module.exports = plugin(dbust)

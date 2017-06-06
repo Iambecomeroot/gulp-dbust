@@ -32,11 +32,9 @@ The 2.x version of this plugin uses dbust 3.x which means we have to tell it to 
 All you have to do to make this change is run `dbust.save` after running all your tasks. Do this like the example above or using [run-sequence](https://www.npmjs.com/package/run-sequence).
 
 ## Why
-Here are two reasons to use this plugin over `rev.manifest()`:
-1. Deletes old files
-1. Locks manifest file for writing (I have had problems with `rev.manifest()` overwriting certain values if the function is called twice in quick succession)
+The main reason to use this over `rev.manifest()` is that it saves all the writing until the end. It is a documented issue that [gulp-rev](https://www.npmjs.com/package/gulp-rev) cannot handle write from different tasks. No offence is meant here. Use whatever floats your goat.
 
-No offence is meant here. Use whatever floats your goat.
+Also, there is a webpack plugin.
 
 ## Testing
 ```

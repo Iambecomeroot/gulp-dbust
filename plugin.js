@@ -24,5 +24,5 @@ module.exports = dbust => {
   return plugin
 }
 
-module.exports.save = _dbust.save
+module.exports.save = () => _dbust.save()
 

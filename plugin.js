@@ -23,3 +23,6 @@ module.exports = dbust => {
   _dbust = dbust
   return plugin
 }
+
+module.exports.save = _dbust.save
+
